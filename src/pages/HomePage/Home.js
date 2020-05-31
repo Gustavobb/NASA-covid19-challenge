@@ -13,8 +13,8 @@ const Rollin = styled.div`animation: 2s ${keyframes`${rollIn}`}`;
 const FadeIn = styled.div`animation: 3s ${keyframes`${fadeIn}`}`;
 const ZoomIn = styled.div`animation: 2s ${keyframes`${zoomIn}`}`;
 
-var goodAnswers = 0;
-var badAnswers = 0;
+var goodAnswers;
+var badAnswers;
 
 const data = {
     labels: ['Nov19', 'Dec19', 'Jan20', 'Feb20', 'Mar20', 'Apr20'],
@@ -62,6 +62,8 @@ class Home extends React.Component {
         this.state.options = this.state.searchOptions;
         this.state.visualizationPath = ["no2/September2019.jpg"];
         this.updateQuery("Carbon Dioxide");
+        goodAnswers = 0;
+        badAnswers = 0;
     }
 
     onChangeRangeInput(event) {
