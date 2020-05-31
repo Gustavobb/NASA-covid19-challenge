@@ -1,21 +1,25 @@
 [
     {
         "name":"CO2",
+        "dataType":"rangeinput",
         "description":"Carbon dioxide is one of the many gases that contributes to global warming. Its concentration in our atmosphere has been growing a lot especially due to fossil fuels combustion. However, during the social isolation its emission has greatly decreased, and hopefully we can work to reduce it even more.", 
         "visualization":"PATH"
     },
     {
         "name":"NO2",
+        "dataType":"rangeinput",
         "description":"Nitrogen dioxide, despite contributing to environmental problems such as acid rain, is also very toxic to the lungs. As CO2, it is released in the atmosphere due to the burning of fuel, and its emission has also been reduced due to the Covid quarantine.", 
-        "visualization":"no2.gif"
+        "visualization":["no2/September2019.jpg", "no2/October2019.jpg", "no2/November2019.jpg", "no2/December2019.jpg", "no2/January2020.jpg", "no2/February2020.jpg", "no2/April2020.jpg", "no2/March2020.jpg"]
     },
     {
         "name":"Deforestation",
+        "dataType":"rangeinput",
         "description":"lorem ipsum dolor sit", 
         "visualization":"PATH"
     },
     {
         "name":"Urban Heats",
+        "dataType":"rangeinput",
         "description":"lorem ipsum dolor sit amet", 
         "visualization":"PATH"
     }
