@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/NASA-covid19-challenge/precache-manifest.d6a0244f13e11c6a0bcd05713e96da90.js"
+  "/NASA-covid19-challenge/precache-manifest.cd80ccd398112f5297f81b8eb66f6aa9.js"
 );
 
 self.addEventListener('message', (event) => {

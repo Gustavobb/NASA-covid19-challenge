@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "596b42726dc4d1e927ed9ab016e77a95",
+    "revision": "5dec87daa9b547c862be994d6a2e20e1",
     "url": "/NASA-covid19-challenge/index.html"
   },
   {
-    "revision": "cf50e3825b0e3009feb9",
+    "revision": "abb20c2fa0be02e71420",
     "url": "/NASA-covid19-challenge/static/css/main.5ecd60fb.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/NASA-covid19-challenge/static/js/2.807b3982.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "cf50e3825b0e3009feb9",
-    "url": "/NASA-covid19-challenge/static/js/main.aa42a3fc.chunk.js"
+    "revision": "abb20c2fa0be02e71420",
+    "url": "/NASA-covid19-challenge/static/js/main.5002d833.chunk.js"
   },
   {
     "revision": "923d8e15c26420e89263",
