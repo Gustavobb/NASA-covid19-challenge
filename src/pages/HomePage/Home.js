@@ -2,6 +2,7 @@ import React from 'react';
 import { Grommet, Box, Text, Header, Anchor, Image, Select } from 'grommet';
 import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
+import database from "../../db.json"
 
 class Home extends React.Component {
     constructor(props) {
@@ -9,8 +10,20 @@ class Home extends React.Component {
         this.state = {
             searchOptions: ['CO2', 'NO2', 'Urban Heats', 'Deforestation'],
             options: ['CO2', 'NO2', 'Urban Heats', 'Deforestation'],
+            dataName: 'NO2',
+            description: 'lorem ipsum dolor',
             value: '',
         };
+    }
+
+    updateQuery(option) {
+        // update name display
+        this.setState({ dataName: option });
+
+        // find description in mock
+        for (var i in database) {
+            if (database[i].name === option) { this.setState({ description: database[i].description }); }
+        } 
     }
 
     render() {
@@ -36,15 +49,15 @@ class Home extends React.Component {
                 <Box background='#EDEDED' pad='xlarge'>
                     <Box direction='row' justify='center' >
                         <Box direction='column' pad='small'>
-                            <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '1.5vh' }}> Co2 </Text>
-                            <Text textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginBottom: '1.5vh' }}> Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br />Nullam dictum purus ac velit pellentesque eleifend </Text>
+                            <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '1.5vh' }}> { this.state.dataName } </Text>
+                            <Text textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginBottom: '1.5vh' }}>{ this.state.description }</Text>
                             <Box alignSelf='center' style={{ width: '12vw' }}>
                                 <Select
                                     size='medium'
                                     placeholder='Select'
                                     value={this.state.value}
                                     options={this.state.options}
-                                    onChange={({ option }) => this.setState({ value: option })}
+                                    onChange={({ option }) => this.updateQuery(option)}
                                     onClose={() => this.setState({ options: this.state.searchOptions })}
                                     onSearch={(text) => {
                                         const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
