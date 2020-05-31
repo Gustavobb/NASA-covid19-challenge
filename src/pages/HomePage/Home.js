@@ -55,7 +55,7 @@ class Home extends React.Component {
                                 placeholder='Select'
                                 value={this.state.value}
                                 options={this.state.options}
-                                onChange={({ option }) => this.setState({ value: option })}
+                                onChange={({ option }) => this.updateQuery(option)}
                                 onClose={() => this.setState({ options: this.state.searchOptions })}
                                 onSearch={(text) => {
                                     const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
