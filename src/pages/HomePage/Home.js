@@ -7,7 +7,7 @@ import database from "../../db.json"
 var goodAnswers = 0;
 var badAnswers = 0;
 class Home extends React.Component {
-    
+
     constructor(props) {
         super(props);
         this.state = {
@@ -34,11 +34,11 @@ class Home extends React.Component {
     componentDidMount() {
         this.updateQuery("NO2");
     }
-    
+
     updateQuery(option) {
         // update name display
         this.setState({ dataName: option });
-        
+
         // find description in db
         for (var i in database) {
             if (database[i].name === option) {
@@ -49,14 +49,14 @@ class Home extends React.Component {
         }
     }
 
-    getQuizResult( type, index) {
+    getQuizResult(type, index) {
         var questionYes = `${index}QuestionYes`;
         var questionNo = `${index}QuestionNo`;
 
         //Check type of radioButton
         if (type === "yes") {
             goodAnswers++;
-            this.setState({ [questionYes]: true, [questionNo]: false});
+            this.setState({ [questionYes]: true, [questionNo]: false });
         } else {
             badAnswers++;
             this.setState({ [questionNo]: true, [questionYes]: false });
@@ -95,24 +95,24 @@ class Home extends React.Component {
                     </Box>
                 </Box>
                 <Box background='#E1FF8D' pad='xlarge' justify='center'>
-                        <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> { this.state.dataName } </Text>
-                        <Box alignSelf='center' style={{ width: '12vw' }}>
-                            <Select
-                                size='medium'
-                                placeholder='Select'
-                                value={this.state.value}
-                                options={this.state.options}
-                                onChange={({ option }) => this.updateQuery(option)}
-                                onClose={() => this.setState({ options: this.state.searchOptions })}
-                                onSearch={(text) => {
-                                    const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
-                                    const exp = new RegExp(escapedText, 'i');
-                                    this.setState({ options: this.state.searchOptions.filter(o => exp.test(o)) });
-                                }}
-                            />
-                        </Box>
-                        <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '3.5vh', width: '40vw'}}> { this.state.description } </Text>
-                        <Image alignSelf='center' style={{marginTop: '6vh', width: '25vw' }} src={require(`./assets/${this.state.visualizationPath}`)} />
+                    <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> {this.state.dataName} </Text>
+                    <Box alignSelf='center' style={{ width: '12vw' }}>
+                        <Select
+                            size='medium'
+                            placeholder='Select'
+                            value={this.state.value}
+                            options={this.state.options}
+                            onChange={({ option }) => this.updateQuery(option)}
+                            onClose={() => this.setState({ options: this.state.searchOptions })}
+                            onSearch={(text) => {
+                                const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
+                                const exp = new RegExp(escapedText, 'i');
+                                this.setState({ options: this.state.searchOptions.filter(o => exp.test(o)) });
+                            }}
+                        />
+                    </Box>
+                    <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '3.5vh', width: '40vw' }}> {this.state.description} </Text>
+                    <Image alignSelf='center' style={{ marginTop: '6vh', width: '25vw' }} src={require(`./assets/${this.state.visualizationPath}`)} />
                 </Box>
                 <Box background='#EDEDED' pad='xlarge' justify='center'>
                     <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px', marginBottom: '3vh' }}>Measure your contribution to the environment</Text>
@@ -140,6 +140,9 @@ class Home extends React.Component {
                         <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '2px', marginTop: '2vh' }}> Result: </Text>
                         <Text alignSelf='center' textAlign='center' style={{ color: this.state.resultColor, fontSize: '2vh', letterSpacing: '2px', marginTop: '2vh' }}>{this.state.quizResult}</Text>
                     </Box>
+                </Box>
+                <Box background='#E1FF8D' pad='large' justify='center'>
+                    <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px'}}>Perhaps Nature needs a break...</Text>
                 </Box>
             </Grommet>
         )
