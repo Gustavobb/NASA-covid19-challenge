@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grommet, Box, Text, Header, Anchor, Image, Select, RadioButton } from 'grommet';
+import { Grommet, Box, Text, Header, Anchor, Image, Select, RadioButton, RangeInput } from 'grommet';
 import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
 import database from "../../db.json"
@@ -11,11 +11,13 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchOptions: ['CO2', 'NO2', 'Urban Heats', 'Deforestation'],
-            options: ['CO2', 'NO2', 'Urban Heats', 'Deforestation'],
+            searchOptions: [],
+            options: [],
             dataName: '',
             description: '',
-            visualizationPath: 'no2.gif',
+            dataType: '',
+            visualizationPath: [],
+            rangeInputValue: 0,
             value: '',
             firstQuestionYes: '',
             firstQuestionNo: '',
@@ -32,9 +34,17 @@ class Home extends React.Component {
     }
 
     componentDidMount() {
+        for (var i in database) {
+            this.state.searchOptions.push(database[i].name);
+        }
+        this.state.options = this.state.searchOptions;
+        this.state.visualizationPath = ["no2/September2019.jpg"];
         this.updateQuery("NO2");
     }
 
+    onChangeRangeInput(event) {
+        this.setState({ rangeInputValue: event.target.value })
+    }
     updateQuery(option) {
         // update name display
         this.setState({ dataName: option });
@@ -44,9 +54,27 @@ class Home extends React.Component {
             if (database[i].name === option) {
                 this.setState({ description: database[i].description });
                 this.setState({ visualizationPath: database[i].visualization });
+                this.setState({ dataType: database[i].dataType });
             }
         }
     }
+
+    renderRangeInputDtype() {
+
+        var month = parseInt(this.state.rangeInputValue/(100/7));
+        var monthName = this.state.visualizationPath[month];
+
+        monthName = monthName.split("/")[1].split(".")[0];
+
+        return (
+            <Box background='#E1FF8D' pad='xlarge' justify='center'>
+                <Text style={{ fontSize: '1.2vh', letterSpacing: '1.5px' }}> { monthName } </Text>
+                <Image alignSelf='center' style={{marginTop: '6vh', width: '25vw' }} src={require(`./assets/${this.state.visualizationPath[month]}`)} />
+                <Box alignSelf="center" pad="medium" style={{ width:"10vw" }}>
+                    <RangeInput value={this.state.rangeInputValue} onChange={(e) => this.onChangeRangeInput(e)} />
+                </Box>
+            </Box>
+        )
 
     getQuizResult(type, index) {
         var questionYes = `${index}QuestionYes`;
@@ -94,24 +122,28 @@ class Home extends React.Component {
                     </Box>
                 </Box>
                 <Box background='#E1FF8D' pad='xlarge' justify='center'>
-                    <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> {this.state.dataName} </Text>
-                    <Box alignSelf='center' style={{ width: '12vw' }}>
-                        <Select
-                            size='medium'
-                            placeholder='Select'
-                            value={this.state.value}
-                            options={this.state.options}
-                            onChange={({ option }) => this.updateQuery(option)}
-                            onClose={() => this.setState({ options: this.state.searchOptions })}
-                            onSearch={(text) => {
-                                const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
-                                const exp = new RegExp(escapedText, 'i');
-                                this.setState({ options: this.state.searchOptions.filter(o => exp.test(o)) });
-                            }}
-                        />
-                    </Box>
-                    <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '3.5vh', width: '40vw' }}> {this.state.description} </Text>
-                    <Image alignSelf='center' style={{ marginTop: '6vh', width: '25vw' }} src={require(`./assets/${this.state.visualizationPath}`)} />
+                        <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> { this.state.dataName } </Text>
+                        <Box alignSelf='center' style={{ width: '12vw' }}>
+                            <Select
+                                size='medium'
+                                placeholder='Select'
+                                value={this.state.value}
+                                options={this.state.options}
+                                onChange={({ option }) => this.updateQuery(option)}
+                                onClose={() => this.setState({ options: this.state.searchOptions })}
+                                onSearch={(text) => {
+                                    const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
+                                    const exp = new RegExp(escapedText, 'i');
+                                    this.setState({ options: this.state.searchOptions.filter(o => exp.test(o)) });
+                                }}
+                            />
+                        </Box>
+                        <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '3.5vh', width: '40vw'}}> { this.state.description } </Text>
+                        
+                        { this.state.dataType === "rangeinput" ?
+                            this.renderRangeInputDtype()
+                        : null }
+
                 </Box>
                 <Box background='#EDEDED' pad='xlarge' justify='center'>
                     <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px', marginBottom: '3vh' }}>Measure your contribution to the environment</Text>
