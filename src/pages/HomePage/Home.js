@@ -18,7 +18,7 @@ var badAnswers = 0;
 const data = {
     labels: ['Nov19', 'Dec19', 'Jan20', 'Feb20', 'Mar20', 'Apr20'],
     datasets: [
-        {   
+        {
             label: 'CO2 mensal ppm variation',
             backgroundColor: '#C6EC5B',
             data: [0.300000000000011, 0.189999999999998, 0.629999999999995, 0.189999999999998, -0.240000000000009, 0.360000000000014]
@@ -77,6 +77,7 @@ class Home extends React.Component {
                 this.setState({ description: database[i].description });
                 this.setState({ visualizationPath: database[i].visualization });
                 this.setState({ dataType: database[i].dataType });
+                this.setState({ references: database[i].references })
             }
         }
     }
@@ -91,24 +92,29 @@ class Home extends React.Component {
 
         return (
             <Box pad='large' justify='center'>
-            <FadeIn>
                 <Image alignSelf='center' style={{ width: '25vw' }} src={require(`./assets/${this.state.visualizationPath[month]}`)} />
                 <Text alignSelf='center' style={{ fontSize: '2vh', letterSpacing: '1.5px', marginTop: '2vh' }}> {monthName} </Text>
                 <Box alignSelf="center" pad="medium" style={{ width: "10vw" }}>
                     <RangeInput value={this.state.rangeInputValue} onChange={(e) => this.onChangeRangeInput(e)} />
                 </Box>
+                <Text alignSelf='center' style={{ fontSize: '1vh', letterSpacing: '1.5px', marginTop: '2vh' }}> <a href="https://gs614-avdc1-pz.gsfc.nasa.gov/index.php?site=356862610&type=1&iDayShow=0&chProductCaptionHere=Monthly%20Average">
+                    {this.state.references} </a>
+                </Text>
             </Box>
-            </FadeIn>
+
         )
     }
 
     renderDataChartDtype() {
         return (
-            <Box alignSelf='center' style={{width: '35vw'}}>
-                <Text alignSelf='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '2.5vh' }}> CO2 variation </Text>
+            <Box alignSelf='center' style={{ width: '35vw' }}>
+                <Text alignSelf='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '2.5vh' }}> Variation </Text>
                 <Bar
                     data={data}
                 />
+                <Text alignSelf='center' style={{ fontSize: '1vh', letterSpacing: '1.5px', marginTop: '2vh' }}> <a href="https://climate.nasa.gov/vital-signs/carbon-dioxide/">
+                    {this.state.references} </a>
+                </Text>
 
             </Box>
         )
@@ -145,7 +151,7 @@ class Home extends React.Component {
                 <FadeIn><Header background='#C6EC5B' pad='small'>
                     <Text textAlign='center' style={{ color: '#000000', fontSize: '2vh', letterSpacing: '1.5px', marginLeft: '4vw' }}>Lockdown Hope</Text>
                     <Box direction='row' gap='medium' style={{ marginRight: '2vw' }}>
-                        <Anchor color='#000000' label='About us' style={{ fontSize: '1.5vh', letterSpacing: '2px' }} />
+                        <Anchor color='#000000' label='About us' style={{ fontSize: '1.5vh', letterSpacing: '2px' }} href="https://covid19.spaceappschallenge.org/challenges/covid-challenges/quiet-planet/teams/toruk-makto-1/project"/>
                     </Box>
                 </Header>
                 </FadeIn>
@@ -159,7 +165,7 @@ class Home extends React.Component {
                         </Box>
                     </Box>
                 </Box>
-                <ZoomIn>
+                {/* <FadeIn> */}
                 <Box background='#E1FF8D' pad='large' justify='center'>
                     <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> {this.state.dataName} </Text>
                     <Box alignSelf='center' style={{ width: '12vw' }}>
@@ -181,39 +187,39 @@ class Home extends React.Component {
 
                     {this.state.dataType === "rangeinput" ?
                         this.renderRangeInputDtype()
-                        : this.renderDataChartDtype()}
+                        : this.state.dataType === "plot" ? this.renderDataChartDtype() : null}
 
                 </Box>
-                </ZoomIn>
+                {/* </FadeIn> */}
                 <ScrollAnimation animateIn="fadeIn">
-                <Box background='#EDEDED' pad='xlarge' justify='center'>
-                
-                    <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px', marginBottom: '4vh' }}>Measure your contribution to the environment</Text>
-                    <Box direction='column' justify='center'>
-                        <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Are you driving a car that uses fossil fuels? </Text>
-                        <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
-                            <RadioButton name='firstButtonYes' label='Yes' checked={this.state.firstQuestionYes} onChange={(event) => this.getQuizResult('yes', 'first')} />
-                            <RadioButton name='firstButtonNo' label='No' checked={this.state.firstQuestionNo} onChange={(event) => this.getQuizResult('no', 'first')} />
+                    <Box background='#EDEDED' pad='xlarge' justify='center'>
+
+                        <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px', marginBottom: '4vh' }}>Measure your contribution to the environment</Text>
+                        <Box direction='column' justify='center'>
+                            <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Are you driving a car that uses fossil fuels? </Text>
+                            <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
+                                <RadioButton name='firstButtonYes' label='Yes' checked={this.state.firstQuestionYes} onChange={(event) => this.getQuizResult('yes', 'first')} />
+                                <RadioButton name='firstButtonNo' label='No' checked={this.state.firstQuestionNo} onChange={(event) => this.getQuizResult('no', 'first')} />
+                            </Box>
+                            <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Are you using public transportation? </Text>
+                            <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
+                                <RadioButton name='secondButtonYes' label='Yes' checked={this.state.secondQuestionYes} onChange={(event) => this.getQuizResult('yes', 'second')} />
+                                <RadioButton name='firstButtonNo' label='No' checked={this.state.secondQuestionNo} onChange={(event) => this.getQuizResult('no', 'second')} />
+                            </Box>
+                            <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Is anyone in your household studying at a distance? </Text>
+                            <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
+                                <RadioButton name='thirdButtonYes' label='Yes' checked={this.state.thirdQuestionYes} onChange={(event) => this.getQuizResult('yes', 'third')} />
+                                <RadioButton name='thirdButtonNo' label='No' checked={this.state.thirdQuestionNo} onChange={(event) => this.getQuizResult('no', 'third')} />
+                            </Box>
+                            <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Are you eating food prepared at home? </Text>
+                            <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
+                                <RadioButton name='fourthButtonYes' label='Yes' checked={this.state.fourthQuestionYes} onChange={(event) => this.getQuizResult('yes', 'fourth')} />
+                                <RadioButton name='fourthButtonNo' label='No' checked={this.state.fourthQuestionNo} onChange={(event) => this.getQuizResult('no', 'fourth')} />
+                            </Box>
+                            <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '2px', marginTop: '2vh' }}> Result: </Text>
+                            <Text alignSelf='center' textAlign='center' style={{ color: this.state.resultColor, fontSize: '2vh', letterSpacing: '2px', marginTop: '2vh' }}>{this.state.quizResult}</Text>
                         </Box>
-                        <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Are you using public transportation? </Text>
-                        <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
-                            <RadioButton name='secondButtonYes' label='Yes' checked={this.state.secondQuestionYes} onChange={(event) => this.getQuizResult('yes', 'second')} />
-                            <RadioButton name='firstButtonNo' label='No' checked={this.state.secondQuestionNo} onChange={(event) => this.getQuizResult('no', 'second')} />
-                        </Box>
-                        <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Is anyone in your household studying at a distance? </Text>
-                        <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
-                            <RadioButton name='thirdButtonYes' label='Yes' checked={this.state.thirdQuestionYes} onChange={(event) => this.getQuizResult('yes', 'third')} />
-                            <RadioButton name='thirdButtonNo' label='No' checked={this.state.thirdQuestionNo} onChange={(event) => this.getQuizResult('no', 'third')} />
-                        </Box>
-                        <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Are you eating food prepared at home? </Text>
-                        <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
-                            <RadioButton name='fourthButtonYes' label='Yes' checked={this.state.fourthQuestionYes} onChange={(event) => this.getQuizResult('yes', 'fourth')} />
-                            <RadioButton name='fourthButtonNo' label='No' checked={this.state.fourthQuestionNo} onChange={(event) => this.getQuizResult('no', 'fourth')} />
-                        </Box>
-                        <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '2px', marginTop: '2vh' }}> Result: </Text>
-                        <Text alignSelf='center' textAlign='center' style={{ color: this.state.resultColor, fontSize: '2vh', letterSpacing: '2px', marginTop: '2vh' }}>{this.state.quizResult}</Text>
                     </Box>
-                </Box>
                 </ScrollAnimation>
                 <Box background='#E1FF8D' pad='large' justify='center'>
                     <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px' }}>Perhaps Nature needs a break...</Text>
