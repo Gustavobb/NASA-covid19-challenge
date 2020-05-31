@@ -118,30 +118,30 @@ class Home extends React.Component {
                     <Box direction='column' justify='center'>
                         <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Are you driving a car that uses fossil fuels? </Text>
                         <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
-                            <RadioButton label='Yes' checked={this.state.firstQuestionYes} onChange={(event) => this.getQuizResult('yes', 'first')} />
-                            <RadioButton label='No' checked={this.state.firstQuestionNo} onChange={(event) => this.getQuizResult('no', 'first')} />
+                            <RadioButton name='firstButtonYes' label='Yes' checked={this.state.firstQuestionYes} onChange={(event) => this.getQuizResult('yes', 'first')} />
+                            <RadioButton name='firstButtonNo' label='No' checked={this.state.firstQuestionNo} onChange={(event) => this.getQuizResult('no', 'first')} />
                         </Box>
                         <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Are you using public transportation? </Text>
                         <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
-                            <RadioButton label='Yes' checked={this.state.secondQuestionYes} onChange={(event) => this.getQuizResult('yes', 'second')} />
-                            <RadioButton label='No' checked={this.state.secondQuestionNo} onChange={(event) => this.getQuizResult('no', 'second')} />
+                            <RadioButton name='secondButtonYes' label='Yes' checked={this.state.secondQuestionYes} onChange={(event) => this.getQuizResult('yes', 'second')} />
+                            <RadioButton name='firstButtonNo' label='No' checked={this.state.secondQuestionNo} onChange={(event) => this.getQuizResult('no', 'second')} />
                         </Box>
                         <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Is anyone in your household studying at a distance? </Text>
                         <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
-                            <RadioButton label='Yes' checked={this.state.thirdQuestionYes} onChange={(event) => this.getQuizResult('yes', 'third')} />
-                            <RadioButton label='No' checked={this.state.thirdQuestionNo} onChange={(event) => this.getQuizResult('no', 'third')} />
+                            <RadioButton name='thirdButtonYes' label='Yes' checked={this.state.thirdQuestionYes} onChange={(event) => this.getQuizResult('yes', 'third')} />
+                            <RadioButton name='thirdButtonNo'label='No' checked={this.state.thirdQuestionNo} onChange={(event) => this.getQuizResult('no', 'third')} />
                         </Box>
                         <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Are you eating food prepared at home? </Text>
                         <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
-                            <RadioButton label='Yes' checked={this.state.fourthQuestionYes} onChange={(event) => this.getQuizResult('yes', 'fourth')} />
-                            <RadioButton label='No' checked={this.state.fourthQuestionNo} onChange={(event) => this.getQuizResult('no', 'fourth')} />
+                            <RadioButton name='fourthButtonYes'label='Yes' checked={this.state.fourthQuestionYes} onChange={(event) => this.getQuizResult('yes', 'fourth')} />
+                            <RadioButton name='fourthButtonNo' label='No' checked={this.state.fourthQuestionNo} onChange={(event) => this.getQuizResult('no', 'fourth')} />
                         </Box>
                         <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '2px', marginTop: '2vh' }}> Result: </Text>
                         <Text alignSelf='center' textAlign='center' style={{ color: this.state.resultColor, fontSize: '2vh', letterSpacing: '2px', marginTop: '2vh' }}>{this.state.quizResult}</Text>
                     </Box>
                 </Box>
                 <Box background='#E1FF8D' pad='large' justify='center'>
-                    <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px'}}>Perhaps Nature needs a break...</Text>
+                    <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px' }}>Perhaps Nature needs a break...</Text>
                 </Box>
             </Grommet>
         )
