@@ -3,11 +3,13 @@ import { Grommet, Box, Text, Header, Anchor, Image, Select, RadioButton, RangeIn
 import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
 import database from "../../db.json";
-import { rollIn, fadeIn } from 'react-animations';
+import { rollIn, fadeIn, zoomIn } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
+import ScrollAnimation from 'react-animate-on-scroll';
 
 const Rollin = styled.div`animation: 2s ${keyframes`${rollIn}`}`;
 const FadeIn = styled.div`animation: 3s ${keyframes`${fadeIn}`}`;
+const ZoomIn = styled.div`animation: 2s ${keyframes`${zoomIn}`}`;
 
 var goodAnswers = 0;
 var badAnswers = 0;
@@ -75,6 +77,7 @@ class Home extends React.Component {
         monthName = monthName.split("/")[1].split(".")[0].replace("2", " 2");
 
         return (
+            <FadeIn>
             <Box background='#E1FF8D' pad='large' justify='center'>
                 <Image alignSelf='center' style={{ width: '25vw' }} src={require(`./assets/${this.state.visualizationPath[month]}`)} />
                 <Text alignSelf='center' style={{ fontSize: '2vh', letterSpacing: '1.5px', marginTop: '2vh' }}> {monthName} </Text>
@@ -82,6 +85,7 @@ class Home extends React.Component {
                     <RangeInput value={this.state.rangeInputValue} onChange={(e) => this.onChangeRangeInput(e)} />
                 </Box>
             </Box>
+            </FadeIn>
         )
     }
 
@@ -130,6 +134,7 @@ class Home extends React.Component {
                         </Box>
                     </Box>
                 </Box>
+                <ZoomIn>
                 <Box background='#E1FF8D' pad='large' justify='center'>
                     <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> {this.state.dataName} </Text>
                     <Box alignSelf='center' style={{ width: '12vw' }}>
@@ -147,15 +152,18 @@ class Home extends React.Component {
                             }}
                         />
                     </Box>
-                    <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '3.5vh', width: '50vw' }}> {this.state.description} </Text>
+                    <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '3.5vh', width: '50vw' }}>{this.state.description}</Text>
 
                     {this.state.dataType === "rangeinput" ?
                         this.renderRangeInputDtype()
                         : null}
 
                 </Box>
+                </ZoomIn>
+                <ScrollAnimation animateIn="fadeIn">
                 <Box background='#EDEDED' pad='xlarge' justify='center'>
-                    <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px', marginBottom: '3vh' }}>Measure your contribution to the environment</Text>
+                
+                    <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px', marginBottom: '4vh' }}>Measure your contribution to the environment</Text>
                     <Box direction='column' justify='center'>
                         <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Are you driving a car that uses fossil fuels? </Text>
                         <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
@@ -181,6 +189,7 @@ class Home extends React.Component {
                         <Text alignSelf='center' textAlign='center' style={{ color: this.state.resultColor, fontSize: '2vh', letterSpacing: '2px', marginTop: '2vh' }}>{this.state.quizResult}</Text>
                     </Box>
                 </Box>
+                </ScrollAnimation>
                 <Box background='#E1FF8D' pad='large' justify='center'>
                     <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px' }}>Perhaps Nature needs a break...</Text>
                 </Box>
