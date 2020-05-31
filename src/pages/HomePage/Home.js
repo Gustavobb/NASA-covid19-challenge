@@ -47,25 +47,24 @@ class Home extends React.Component {
                     </Box>
                 </Box>
                 <Box background='#E1FF8D' pad='xlarge' justify='center'>
-                    <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '1.5vh' }}> {this.state.dataName} </Text>
-                    <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginBottom: '3vh', width: '50vw' }}> {this.state.description} </Text>
-                    <Box alignSelf='center' style={{ width: '12vw' }}>
-                        <Select
-                            size='medium'
-                            placeholder='Select'
-                            value={this.state.value}
-                            options={this.state.options}
-                            onChange={({ option }) => this.updateQuery(option)}
-                            onClose={() => this.setState({ options: this.state.searchOptions })}
-                            onSearch={(text) => {
-                                const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
-                                const exp = new RegExp(escapedText, 'i');
-                                this.setState({ options: this.state.searchOptions.filter(o => exp.test(o)) });
-                            }}
-                        />
-                    </Box>
-                    <Text textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '5vh' }}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum purus ac velit pellentesque eleifend </Text>
-                    <Image alignSelf='center' style={{ marginTop: '6vh', width: '25vw' }} src={require('./assets/no2.gif')} />
+                        <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '1.5vh' }}> { this.state.dataName } </Text>
+                        <Box alignSelf='center' style={{ width: '12vw' }}>
+                            <Select
+                                size='medium'
+                                placeholder='Select'
+                                value={this.state.value}
+                                options={this.state.options}
+                                onChange={({ option }) => this.updateQuery(option)}
+                                onClose={() => this.setState({ options: this.state.searchOptions })}
+                                onSearch={(text) => {
+                                    const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
+                                    const exp = new RegExp(escapedText, 'i');
+                                    this.setState({ options: this.state.searchOptions.filter(o => exp.test(o)) });
+                                }}
+                            />
+                        </Box>
+                        <Text textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginBottom: '3vh' }}> { this.state.description } </Text>
+                        <Image alignSelf='center' style={{marginTop: '6vh', width: '25vw' }} src={require('./assets/no2.gif')} />
                 </Box>
                 <Box background='#EDEDED' direction='row' pad='xlarge' justify='center'>
                     <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px' }}>Measure your contribution to the environment</Text>
