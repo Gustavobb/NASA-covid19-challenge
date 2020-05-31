@@ -1,0 +1,19 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "backend in nodejs for covid-19 challenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gustavobb/NASA-covid19-challenge.git"
+  },
+  "author": "GustavoBraga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gustavobb/NASA-covid19-challenge/issues"
+  },
+  "homepage": "https://github.com/Gustavobb/NASA-covid19-challenge#readme"
+}
