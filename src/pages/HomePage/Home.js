@@ -1,8 +1,9 @@
 import React from 'react';
-import { Grommet, Box, Text, Header, Anchor, Image, Select, RadioButton, RangeInput } from 'grommet';
+import { Grommet, Box, Text, Header, Anchor, Image, Select, RadioButton, RangeInput, Chart } from 'grommet';
 import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
 import database from "../../db.json";
+import { Bar } from 'react-chartjs-2';
 import { rollIn, fadeIn, zoomIn } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
 import ScrollAnimation from 'react-animate-on-scroll';
@@ -13,6 +14,18 @@ const ZoomIn = styled.div`animation: 2s ${keyframes`${zoomIn}`}`;
 
 var goodAnswers = 0;
 var badAnswers = 0;
+
+const data = {
+    labels: ['Nov19', 'Dec19', 'Jan20', 'Feb20', 'Mar20', 'Apr20'],
+    datasets: [
+        {   
+            label: 'CO2 mensal ppm variation',
+            backgroundColor: '#C6EC5B',
+            data: [0.300000000000011, 0.189999999999998, 0.629999999999995, 0.189999999999998, -0.240000000000009, 0.360000000000014]
+        }
+    ]
+};
+
 
 class Home extends React.Component {
 
@@ -69,16 +82,16 @@ class Home extends React.Component {
     }
 
     renderRangeInputDtype() {
-        
+
         var month = parseInt(this.state.rangeInputValue / (100 / 7));
-        
+
         var monthName = this.state.visualizationPath[month];
 
         monthName = monthName.split("/")[1].split(".")[0].replace("2", " 2");
 
         return (
+            <Box pad='large' justify='center'>
             <FadeIn>
-            <Box background='#E1FF8D' pad='large' justify='center'>
                 <Image alignSelf='center' style={{ width: '25vw' }} src={require(`./assets/${this.state.visualizationPath[month]}`)} />
                 <Text alignSelf='center' style={{ fontSize: '2vh', letterSpacing: '1.5px', marginTop: '2vh' }}> {monthName} </Text>
                 <Box alignSelf="center" pad="medium" style={{ width: "10vw" }}>
@@ -86,6 +99,18 @@ class Home extends React.Component {
                 </Box>
             </Box>
             </FadeIn>
+        )
+    }
+
+    renderDataChartDtype() {
+        return (
+            <Box alignSelf='center' style={{width: '35vw'}}>
+                <Text alignSelf='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '2.5vh' }}> CO2 variation </Text>
+                <Bar
+                    data={data}
+                />
+
+            </Box>
         )
     }
 
@@ -156,7 +181,7 @@ class Home extends React.Component {
 
                     {this.state.dataType === "rangeinput" ?
                         this.renderRangeInputDtype()
-                        : null}
+                        : this.renderDataChartDtype()}
 
                 </Box>
                 </ZoomIn>
