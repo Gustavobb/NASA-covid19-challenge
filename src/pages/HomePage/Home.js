@@ -20,7 +20,7 @@ const data = {
     labels: ['Nov19', 'Dec19', 'Jan20', 'Feb20', 'Mar20', 'Apr20'],
     datasets: [
         {
-            label: 'CO2 mensal ppm variation',
+            label: 'CO2 monthly ppm variation',
             backgroundColor: '#C6EC5B',
             data: [0.300000000000011, 0.189999999999998, 0.629999999999995, 0.189999999999998, -0.240000000000009, 0.360000000000014]
         }
