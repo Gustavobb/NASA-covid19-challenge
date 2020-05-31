@@ -2,10 +2,16 @@ import React from 'react';
 import { Grommet, Box, Text, Header, Anchor, Image, Select, RadioButton, RangeInput } from 'grommet';
 import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
-import database from "../../db.json"
+import database from "../../db.json";
+import { rollIn, fadeIn } from 'react-animations';
+import styled, { keyframes } from 'styled-components';
+
+const Rollin = styled.div`animation: 2s ${keyframes`${rollIn}`}`;
+const FadeIn = styled.div`animation: 3s ${keyframes`${fadeIn}`}`;
 
 var goodAnswers = 0;
 var badAnswers = 0;
+
 class Home extends React.Component {
 
     constructor(props) {
@@ -107,19 +113,20 @@ class Home extends React.Component {
     render() {
         return (
             <Grommet theme={customTheme}>
-                <Header background='#C6EC5B' pad='small'>
+                <FadeIn><Header background='#C6EC5B' pad='small'>
                     <Text textAlign='center' style={{ color: '#000000', fontSize: '2vh', letterSpacing: '1.5px', marginLeft: '4vw' }}>Lockdown Hope</Text>
                     <Box direction='row' gap='medium' style={{ marginRight: '2vw' }}>
                         <Anchor color='#000000' label='About us' style={{ fontSize: '1.5vh', letterSpacing: '2px' }} />
                     </Box>
                 </Header>
+                </FadeIn>
                 <Box background='#EDEDED' direction='row' pad='xlarge' justify='center'>
                     <Box direction='row' justify='start' gap='xlarge'>
-                        <Image style={{ width: '15vw' }} src={require('./assets/tree.png')} />
+                        <Rollin><Image style={{ width: '15vw' }} src={require('./assets/tree.png')} /></Rollin>
                         <Box direction='column' justify='center'>
-                            <Text textAlign='center' style={{ fontSize: '3.5vh', marginBottom: '2vh', letterSpacing: '1.5px' }}>Does quarantine affect the enviroment?</Text>
-                            <Text textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px' }}>The covid-19 pandemic changed several human activities.<br />
-                            Maybe for the environment this has a positive meaning</Text>
+                            <Text textAlign='center' style={{ fontSize: '3.5vh', marginBottom: '2vh', letterSpacing: '1.5px' }}><FadeIn>Does quarantine affect the enviroment?</FadeIn></Text>
+                            <Text textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px' }}><FadeIn>The covid-19 pandemic changed several human activities.<br />
+                            Maybe for the environment this has a positive meaning</FadeIn></Text>
                         </Box>
                     </Box>
                 </Box>
