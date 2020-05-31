@@ -7,7 +7,7 @@
     {
         "name":"NO2",
         "description":"Nitrogen dioxide, despite contributing to environmental problems such as acid rain, is also very toxic to the lungs. As CO2, it is released in the atmosphere due to the burning of fuel, and its emission has also been reduced due to the Covid quarantine.", 
-        "visualization":"PATH"
+        "visualization":"no2.gif"
     },
     {
         "name":"Deforestation",
