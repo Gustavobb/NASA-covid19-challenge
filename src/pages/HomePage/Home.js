@@ -61,7 +61,7 @@ class Home extends React.Component {
         }
         this.state.options = this.state.searchOptions;
         this.state.visualizationPath = ["no2/September2019.jpg"];
-        this.updateQuery("Nitrogen dioxide");
+        this.updateQuery("Carbon Dioxide");
         goodAnswers = 0;
         badAnswers = 0;
     }
@@ -94,15 +94,13 @@ class Home extends React.Component {
         monthName = monthName.split("/")[1].split(".")[0].replace("2", " 2");
 
         return (
-            <Box pad='large' justify='center'>
-                <Image alignSelf='center' style={{ width: '25vw' }} src={require(`./assets/${this.state.visualizationPath[month]}`)} />
-                <Text alignSelf='center' style={{ fontSize: '2vh', letterSpacing: '1.5px', marginTop: '2vh' }}> {monthName} </Text>
-                <Box alignSelf="center" pad="medium" style={{ width: "10vw" }}>
+            <Box pad='small' justify='center'>
+                <Image alignSelf='center' style={{ width: '35vw' }} src={require(`./assets/${this.state.visualizationPath[month]}`)} />
+                <Text alignSelf='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '2vh' }}> {monthName} </Text>
+                <Box alignSelf="center" pad="medium" style={{ width: "25vw" }}>
                     <RangeInput value={this.state.rangeInputValue} onChange={(e) => this.onChangeRangeInput(e)} />
                 </Box>
-                <Text alignSelf='center' style={{ fontSize: '1vh', letterSpacing: '1.5px', marginTop: '2vh' }}> <a href="https://gs614-avdc1-pz.gsfc.nasa.gov/index.php?site=356862610&type=1&iDayShow=0&chProductCaptionHere=Monthly%20Average">
-                    {this.state.references} </a>
-                </Text>
+                <Text alignSelf='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '2vh' }}> {this.state.references} </Text>
             </Box>
 
         )
@@ -110,14 +108,12 @@ class Home extends React.Component {
 
     renderDataChartDtype() {
         return (
-            <Box alignSelf='center' style={{ width: '35vw' }}>
+            <Box pad='large' alignSelf='center' style={{ width: '40vw' }}>
                 <Text alignSelf='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '2.5vh' }}> Variation </Text>
                 <Bar
                     data={data}
                 />
-                <Text alignSelf='center' style={{ fontSize: '1vh', letterSpacing: '1.5px', marginTop: '2vh' }}> <a href="https://climate.nasa.gov/vital-signs/carbon-dioxide/">
-                    {this.state.references} </a>
-                </Text>
+                <Text alignSelf='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '2vh' }}>{this.state.references}</Text>
 
             </Box>
         )
@@ -154,8 +150,8 @@ class Home extends React.Component {
                 <FadeIn><Header background='#C6EC5B' pad='small'>
                     <Text textAlign='center' style={{ color: '#000000', fontSize: '2vh', letterSpacing: '1.5px', marginLeft: '4vw' }}>Lockdown Hope</Text>
                     <Box direction='row' gap='medium' style={{ marginRight: '2vw' }}>
-                        <Anchor color='#000000' label='About us' style={{ fontSize: '1.5vh', letterSpacing: '2px' }} href="https://covid19.spaceappschallenge.org/challenges/covid-challenges/quiet-planet/teams/toruk-makto-1/project"/>
-                        <a href="https://github.com/Gustavobb/NASA-covid19-challenge"><Github size='medium' color='#000000'/></a> 
+                        <Anchor color='#000000' label='About us' style={{ fontSize: '1.5vh', letterSpacing: '2px' }} href="https://covid19.spaceappschallenge.org/challenges/covid-challenges/quiet-planet/teams/toruk-makto-1/project" />
+                        <a href="https://github.com/Gustavobb/NASA-covid19-challenge"><Github size='medium' color='#000000' /></a>
                     </Box>
                 </Header>
                 </FadeIn>
@@ -171,28 +167,32 @@ class Home extends React.Component {
                 </Box>
                 {/* <FadeIn> */}
                 <Box background='#E1FF8D' pad='large' justify='center'>
-                    <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> {this.state.dataName} </Text>
-                    <Box alignSelf='center' style={{ width: '12vw' }}>
-                        <Select
-                            size='medium'
-                            placeholder='Select'
-                            value={this.state.value}
-                            options={this.state.options}
-                            onChange={({ option }) => this.updateQuery(option)}
-                            onClose={() => this.setState({ options: this.state.searchOptions })}
-                            onSearch={(text) => {
-                                const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
-                                const exp = new RegExp(escapedText, 'i');
-                                this.setState({ options: this.state.searchOptions.filter(o => exp.test(o)) });
-                            }}
-                        />
+                    <Box direction='row' justify='center' gap='large'>
+                        <Box direction='column' style={{marginTop: '6vh'}}>
+                            <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> {this.state.dataName} </Text>
+                            <Box alignSelf='center' style={{ width: '15vw' }}>
+                                <Select
+                                    size='medium'
+                                    placeholder='Choose an indicator'
+                                    value={this.state.value}
+                                    options={this.state.options}
+                                    onChange={({ option }) => this.updateQuery(option)}
+                                    onClose={() => this.setState({ options: this.state.searchOptions })}
+                                    onSearch={(text) => {
+                                        const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
+                                        const exp = new RegExp(escapedText, 'i');
+                                        this.setState({ options: this.state.searchOptions.filter(o => exp.test(o)) });
+                                    }}
+                                />
+                            </Box>
+
+
+                            <Text  alignSelf='center' style={{ lineHeight: '2', textIndent: '50px', fontSize: '1.8vh', letterSpacing: '1px', marginTop: '3.5vh', width: '45vw' }}>{this.state.description}</Text>
+                        </Box>
+                        {this.state.dataType === "rangeinput" ? this.renderRangeInputDtype()
+                            : this.state.dataType === "plot" ? this.renderDataChartDtype()
+                                : null}
                     </Box>
-                    <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '3.5vh', width: '50vw' }}>{this.state.description}</Text>
-
-                    {this.state.dataType === "rangeinput" ? this.renderRangeInputDtype()
-                    : this.state.dataType === "plot" ? this.renderDataChartDtype() 
-                    : null}
-
                 </Box>
                 {/* </FadeIn> */}
                 <ScrollAnimation animateIn="fadeIn">
@@ -220,8 +220,8 @@ class Home extends React.Component {
                                 <RadioButton name='fourthButtonYes' label='Yes' checked={this.state.fourthQuestionYes} onChange={(event) => this.getQuizResult('yes', 'fourth')} />
                                 <RadioButton name='fourthButtonNo' label='No' checked={this.state.fourthQuestionNo} onChange={(event) => this.getQuizResult('no', 'fourth')} />
                             </Box>
-                            <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '2px', marginTop: '2vh' }}> Result: </Text>
-                            <Text alignSelf='center' textAlign='center' style={{ color: this.state.resultColor, fontSize: '2vh', letterSpacing: '2px', marginTop: '2vh' }}>{this.state.quizResult}</Text>
+                            <Text alignSelf='center' textAlign='center' style={{ fontSize: '3vh', letterSpacing: '2px', marginTop: '2vh' }}> Result: </Text>
+                            <Text alignSelf='center' textAlign='center' style={{ color: this.state.resultColor, fontSize: '3vh', letterSpacing: '2px', marginTop: '2vh' }}>{this.state.quizResult}</Text>
                         </Box>
                     </Box>
                 </ScrollAnimation>
