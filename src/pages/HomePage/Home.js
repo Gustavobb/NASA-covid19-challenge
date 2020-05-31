@@ -159,7 +159,7 @@ class Home extends React.Component {
                     <Box direction='row' justify='start' gap='xlarge'>
                         <Rollin><Image style={{ width: '15vw' }} src={require('./assets/tree.png')} /></Rollin>
                         <Box direction='column' justify='center'>
-                            <Text textAlign='center' style={{ fontSize: '3.5vh', marginBottom: '2vh', letterSpacing: '1.5px' }}><FadeIn>Does quarantine affect the enviroment?</FadeIn></Text>
+                            <Text textAlign='center' style={{ fontSize: '3.5vh', marginBottom: '2vh', letterSpacing: '1.5px' }}><FadeIn>Does quarantine affect the environment?</FadeIn></Text>
                             <Text textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px' }}><FadeIn>The covid-19 pandemic changed several human activities.<br />
                             Maybe for the environment this has a positive meaning.</FadeIn></Text>
                         </Box>
