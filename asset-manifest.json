@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/NASA-covid19-challenge/static/css/main.5ecd60fb.chunk.css",
-    "main.js": "/NASA-covid19-challenge/static/js/main.38124c2f.chunk.js",
-    "main.js.map": "/NASA-covid19-challenge/static/js/main.38124c2f.chunk.js.map",
+    "main.js": "/NASA-covid19-challenge/static/js/main.aa42a3fc.chunk.js",
+    "main.js.map": "/NASA-covid19-challenge/static/js/main.aa42a3fc.chunk.js.map",
     "runtime-main.js": "/NASA-covid19-challenge/static/js/runtime-main.e06a0c18.js",
     "runtime-main.js.map": "/NASA-covid19-challenge/static/js/runtime-main.e06a0c18.js.map",
     "static/js/2.807b3982.chunk.js": "/NASA-covid19-challenge/static/js/2.807b3982.chunk.js",
     "static/js/2.807b3982.chunk.js.map": "/NASA-covid19-challenge/static/js/2.807b3982.chunk.js.map",
     "index.html": "/NASA-covid19-challenge/index.html",
-    "precache-manifest.ff88b1bab92054632ac0cd0c05a32cf5.js": "/NASA-covid19-challenge/precache-manifest.ff88b1bab92054632ac0cd0c05a32cf5.js",
+    "precache-manifest.d6a0244f13e11c6a0bcd05713e96da90.js": "/NASA-covid19-challenge/precache-manifest.d6a0244f13e11c6a0bcd05713e96da90.js",
     "service-worker.js": "/NASA-covid19-challenge/service-worker.js",
     "static/css/main.5ecd60fb.chunk.css.map": "/NASA-covid19-challenge/static/css/main.5ecd60fb.chunk.css.map",
     "static/js/2.807b3982.chunk.js.LICENSE.txt": "/NASA-covid19-challenge/static/js/2.807b3982.chunk.js.LICENSE.txt",
@@ -26,6 +26,6 @@
     "static/js/runtime-main.e06a0c18.js",
     "static/js/2.807b3982.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
-    "static/js/main.38124c2f.chunk.js"
+    "static/js/main.aa42a3fc.chunk.js"
   ]
 }
