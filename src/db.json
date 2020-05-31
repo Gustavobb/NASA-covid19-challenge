@@ -1,0 +1,22 @@
+[
+    {
+        "name":"CO2",
+        "description":"lorem ipsum", 
+        "visualization":"PATH"
+    },
+    {
+        "name":"NO2",
+        "description":"lorem ipsum dolor", 
+        "visualization":"PATH"
+    },
+    {
+        "name":"Deforestation",
+        "description":"lorem ipsum dolor sit", 
+        "visualization":"PATH"
+    },
+    {
+        "name":"Urban Heats",
+        "description":"lorem ipsum dolor sit amet", 
+        "visualization":"PATH"
+    }
+]
