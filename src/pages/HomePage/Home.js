@@ -5,24 +5,34 @@ import { deepMerge } from 'grommet/utils';
 import database from "../../db.json"
 
 class Home extends React.Component {
+    
     constructor(props) {
         super(props);
         this.state = {
             searchOptions: ['CO2', 'NO2', 'Urban Heats', 'Deforestation'],
             options: ['CO2', 'NO2', 'Urban Heats', 'Deforestation'],
-            dataName: 'NO2',
-            description: 'Nitrogen dioxide, despite contributing to environmental problems such as acid rain, is also very toxic to the lungs. As CO2, it is released in the atmosphere due to the burning of fuel, and its emission has also been reduced due to the Covid quarantine.',
+            dataName: '',
+            description: '',
+            visualizationPath: 'no2.gif',
             value: '',
         };
     }
 
+    componentDidMount() {
+        this.updateQuery("NO2");
+    }
+    
     updateQuery(option) {
         // update name display
         this.setState({ dataName: option });
-
-        // find description in mock
+        
+        // find description in db
         for (var i in database) {
-            if (database[i].name === option) { this.setState({ description: database[i].description }); }
+            if (database[i].name === option) {
+                console.log(database[i])
+                this.setState({ description: database[i].description });
+                this.setState({ visualizationPath: database[i].visualization });
+            }
         }
     }
 
@@ -64,7 +74,7 @@ class Home extends React.Component {
                             />
                         </Box>
                         <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '3.5vh', width: '40vw'}}> { this.state.description } </Text>
-                        <Image alignSelf='center' style={{marginTop: '6vh', width: '25vw' }} src={require('./assets/no2.gif')} />
+                        <Image alignSelf='center' style={{marginTop: '6vh', width: '25vw' }} src={require(`./assets/${this.state.visualizationPath}`)} />
                 </Box>
                 <Box background='#EDEDED' direction='row' pad='xlarge' justify='center'>
                     <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px' }}>Measure your contribution to the environment</Text>
