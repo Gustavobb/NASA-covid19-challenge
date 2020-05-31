@@ -1,15 +1,15 @@
 [
     {
-        "name":"CO2",
+        "name":"Carbon Dioxide",
         "dataType":"plot",
-        "description":"Carbon dioxide is one of the many gases that contributes to global warming. Its concentration in our atmosphere has been growing a lot especially due to fossil fuels combustion. However, during the social isolation its emission has greatly decreased, since people have had to stay home and cannot use their vehicles. Also, polluting industries reduced their emission due to the lack of workers in the marketplace. It was found in April 2020 that after some countries decreed a more flexible quarantine the CO2 emission rate rose again. Hopefully during and after the lockdown we can work on reducing the CO2 emission.", 
+        "description":"Carbon dioxide is one of the many gases that contributes to global warming. Its concentration in our atmosphere has been growing a lot especially due to fossil fuels combustion. However, during the social isolation its emission has greatly decreased, since people have had to stay home and cannot use their vehicles. Also, polluting industries reduced their emission due to the lack of workers in the marketplace. It was found in April 2020 that after some countries decreed a more flexible quarantine the Carbon dioxide emission rate rose again. Hopefully during and after the lockdown we can work on reducing the Carbon dioxide emission.", 
         "visualization":"PATH",
         "references":"NASA Global Climate Change - Vital Signs of the Planet,"
     },
     {
-        "name":"NO2",
+        "name":"Nitrogen Dioxide",
         "dataType":"rangeinput",
-        "description": "Nitrogen dioxide, despite contributing to environmental problems such as acid rain, is also very toxic to the lungs. As CO2, it is released in the atmosphere due to the burning of fuel, and its emission has also been reduced due to the Covid quarantine for the same reasons as CO2. NASA was able to create an amazing comparison of the NO2 pollution along the american east coast from 2015 to 2020, and the visible impact generated from the lockdown is absolutely amazing as you can see below. Nitrogen dioxide, despite contributing to environmental problems such as acid rain, is also very toxic to the lungs. As CO2, it is released in the atmosphere due to the burning of fuel, and its emission has also been reduced due to the Covid quarantine for the same reasons as CO2. NASA was able to create an amazing comparison of the global NO2 pollution from 2015 to 2020, and the visible impact generated from the lockdown is absolutely amazing as you can see below.", 
+        "description": "Nitrogen dioxide, despite contributing to environmental problems such as acid rain, is also very toxic to the lungs. As Carbon dioxide, it is released in the atmosphere due to the burning of fuel, and its emission has also been reduced due to the Covid quarantine. Nitrogen dioxide, despite contributing to environmental problems such as acid rain, is also very toxic to the lungs. NASA was able to create an amazing comparison of the global Nitrogen dioxide pollution from 2015 to 2020, and the visible impact generated from the lockdown is absolutely amazing as you can see below.", 
         "visualization":["no2/September2019.jpg", "no2/October2019.jpg", "no2/November2019.jpg", "no2/December2019.jpg", "no2/January2020.jpg", "no2/February2020.jpg", "no2/March2020.jpg", "no2/April2020.jpg"],
         "references":"NASA Aura Validation Data Center - Tropospheric NO2 CS30 vertical column densities (VCD)"
     },
