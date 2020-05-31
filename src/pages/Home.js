@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grommet, Box, TextInput, Text, Header, Anchor, Image } from 'grommet';
+import { Grommet, Box, Text, Header, Anchor, Image, Select } from 'grommet';
 import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
 
@@ -11,15 +11,13 @@ class Home extends React.Component {
           options: ["CO2", "Water", "1", "2", "3"],
           value: "",
         };
-
-
     }
 
     render() {
         return (
             <Grommet theme={customTheme}>
                 <Header background='#EDEDED' pad='small'>
-                    <Text textAlign='center' style={{ color: '#000000', fontSize: '2vh', letterSpacing: '1.5px' }} >Lockdown Hope</Text>
+                    <Text textAlign='center' style={{ color: '#000000', fontSize: '2vh', letterSpacing: '1.5px' }}>Lockdown Hope</Text>
                     <Box direction='row' gap='medium' style={{ marginRight: '2vw' }}>
                         <Anchor color='#000000' label='Section 1' style={{ fontSize: '1.5vh', letterSpacing: '2px' }} />
                         <Anchor color='#000000' label='Section 2' style={{ fontSize: '1.5vh', letterSpacing: '2px' }} />
@@ -35,8 +33,8 @@ class Home extends React.Component {
                         <Image style={{ width: '25vw' }} src='https://picsum.photos/300/200' />
                     </Box>
                 </Box>
-                <Box align="center" pad="large">
-                    <Text style={{ fontSize: "2vh", letterSpacing:"1.5px" }}> Co2 </Text>
+                <Box background='#EDEDED' align="center" pad="xlarge">
+                    <Text style={{ fontSize: "3.5vh", letterSpacing:"1.5px" }}> Co2 </Text>
                     <Text style={{ fontSize: "1.5vh", letterSpacing:"1.5px" }}> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum purus ac velit pellentesque eleifend </Text>
                     <Select
                       font
@@ -52,6 +50,7 @@ class Home extends React.Component {
                         this.setState({ options: this.state.searchOptions.filter(o => exp.test(o))});
                       }}
                     />
+                    <Image style={{ width: '25vw' }} src='https://picsum.photos/300/200' />
                 </Box>
             </Grommet>
         )
