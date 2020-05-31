@@ -45,6 +45,7 @@ class Home extends React.Component {
     onChangeRangeInput(event) {
         this.setState({ rangeInputValue: event.target.value })
     }
+
     updateQuery(option) {
         // update name display
         this.setState({ dataName: option });
@@ -60,21 +61,23 @@ class Home extends React.Component {
     }
 
     renderRangeInputDtype() {
-
-        var month = parseInt(this.state.rangeInputValue/(100/7));
+        
+        var month = parseInt(this.state.rangeInputValue / (100 / 7));
+        
         var monthName = this.state.visualizationPath[month];
 
-        monthName = monthName.split("/")[1].split(".")[0];
+        monthName = monthName.split("/")[1].split(".")[0].replace("2", " 2");
 
         return (
-            <Box background='#E1FF8D' pad='xlarge' justify='center'>
-                <Text style={{ fontSize: '1.2vh', letterSpacing: '1.5px' }}> { monthName } </Text>
-                <Image alignSelf='center' style={{marginTop: '6vh', width: '25vw' }} src={require(`./assets/${this.state.visualizationPath[month]}`)} />
-                <Box alignSelf="center" pad="medium" style={{ width:"10vw" }}>
+            <Box background='#E1FF8D' pad='large' justify='center'>
+                <Image alignSelf='center' style={{ width: '25vw' }} src={require(`./assets/${this.state.visualizationPath[month]}`)} />
+                <Text alignSelf='center' style={{ fontSize: '2vh', letterSpacing: '1.5px', marginTop: '2vh' }}> {monthName} </Text>
+                <Box alignSelf="center" pad="medium" style={{ width: "10vw" }}>
                     <RangeInput value={this.state.rangeInputValue} onChange={(e) => this.onChangeRangeInput(e)} />
                 </Box>
             </Box>
         )
+    }
 
     getQuizResult(type, index) {
         var questionYes = `${index}QuestionYes`;
@@ -107,8 +110,7 @@ class Home extends React.Component {
                 <Header background='#C6EC5B' pad='small'>
                     <Text textAlign='center' style={{ color: '#000000', fontSize: '2vh', letterSpacing: '1.5px', marginLeft: '4vw' }}>Lockdown Hope</Text>
                     <Box direction='row' gap='medium' style={{ marginRight: '2vw' }}>
-                        <Anchor color='#000000' label='Section 1' style={{ fontSize: '1.5vh', letterSpacing: '2px' }} />
-                        <Anchor color='#000000' label='Section 2' style={{ fontSize: '1.5vh', letterSpacing: '2px' }} />
+                        <Anchor color='#000000' label='About us' style={{ fontSize: '1.5vh', letterSpacing: '2px' }} />
                     </Box>
                 </Header>
                 <Box background='#EDEDED' direction='row' pad='xlarge' justify='center'>
@@ -121,28 +123,28 @@ class Home extends React.Component {
                         </Box>
                     </Box>
                 </Box>
-                <Box background='#E1FF8D' pad='xlarge' justify='center'>
-                        <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> { this.state.dataName } </Text>
-                        <Box alignSelf='center' style={{ width: '12vw' }}>
-                            <Select
-                                size='medium'
-                                placeholder='Select'
-                                value={this.state.value}
-                                options={this.state.options}
-                                onChange={({ option }) => this.updateQuery(option)}
-                                onClose={() => this.setState({ options: this.state.searchOptions })}
-                                onSearch={(text) => {
-                                    const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
-                                    const exp = new RegExp(escapedText, 'i');
-                                    this.setState({ options: this.state.searchOptions.filter(o => exp.test(o)) });
-                                }}
-                            />
-                        </Box>
-                        <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '3.5vh', width: '40vw'}}> { this.state.description } </Text>
-                        
-                        { this.state.dataType === "rangeinput" ?
-                            this.renderRangeInputDtype()
-                        : null }
+                <Box background='#E1FF8D' pad='large' justify='center'>
+                    <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> {this.state.dataName} </Text>
+                    <Box alignSelf='center' style={{ width: '12vw' }}>
+                        <Select
+                            size='medium'
+                            placeholder='Select'
+                            value={this.state.value}
+                            options={this.state.options}
+                            onChange={({ option }) => this.updateQuery(option)}
+                            onClose={() => this.setState({ options: this.state.searchOptions })}
+                            onSearch={(text) => {
+                                const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
+                                const exp = new RegExp(escapedText, 'i');
+                                this.setState({ options: this.state.searchOptions.filter(o => exp.test(o)) });
+                            }}
+                        />
+                    </Box>
+                    <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '3.5vh', width: '50vw' }}> {this.state.description} </Text>
+
+                    {this.state.dataType === "rangeinput" ?
+                        this.renderRangeInputDtype()
+                        : null}
 
                 </Box>
                 <Box background='#EDEDED' pad='xlarge' justify='center'>
@@ -161,11 +163,11 @@ class Home extends React.Component {
                         <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Is anyone in your household studying at a distance? </Text>
                         <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
                             <RadioButton name='thirdButtonYes' label='Yes' checked={this.state.thirdQuestionYes} onChange={(event) => this.getQuizResult('yes', 'third')} />
-                            <RadioButton name='thirdButtonNo'label='No' checked={this.state.thirdQuestionNo} onChange={(event) => this.getQuizResult('no', 'third')} />
+                            <RadioButton name='thirdButtonNo' label='No' checked={this.state.thirdQuestionNo} onChange={(event) => this.getQuizResult('no', 'third')} />
                         </Box>
                         <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Are you eating food prepared at home? </Text>
                         <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
-                            <RadioButton name='fourthButtonYes'label='Yes' checked={this.state.fourthQuestionYes} onChange={(event) => this.getQuizResult('yes', 'fourth')} />
+                            <RadioButton name='fourthButtonYes' label='Yes' checked={this.state.fourthQuestionYes} onChange={(event) => this.getQuizResult('yes', 'fourth')} />
                             <RadioButton name='fourthButtonNo' label='No' checked={this.state.fourthQuestionNo} onChange={(event) => this.getQuizResult('no', 'fourth')} />
                         </Box>
                         <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '2px', marginTop: '2vh' }}> Result: </Text>
@@ -191,6 +193,7 @@ const customTheme = deepMerge(grommet, {
         hover: {
             background: '#C6EC5B'
         }
+
     },
     select: {
         icons: {
@@ -208,6 +211,11 @@ const customTheme = deepMerge(grommet, {
             border: {
                 color: '#808080'
             }
+        }
+    },
+    rangeInput: {
+        thumb: {
+            color: "#808080"
         }
     }
 });
