@@ -47,7 +47,7 @@ class Home extends React.Component {
                     </Box>
                 </Box>
                 <Box background='#E1FF8D' pad='xlarge' justify='center'>
-                        <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '1.5vh' }}> { this.state.dataName } </Text>
+                        <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> { this.state.dataName } </Text>
                         <Box alignSelf='center' style={{ width: '12vw' }}>
                             <Select
                                 size='medium'
@@ -63,7 +63,7 @@ class Home extends React.Component {
                                 }}
                             />
                         </Box>
-                        <Text textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginBottom: '3vh' }}> { this.state.description } </Text>
+                        <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '3.5vh', width: '40vw'}}> { this.state.description } </Text>
                         <Image alignSelf='center' style={{marginTop: '6vh', width: '25vw' }} src={require('./assets/no2.gif')} />
                 </Box>
                 <Box background='#EDEDED' direction='row' pad='xlarge' justify='center'>
