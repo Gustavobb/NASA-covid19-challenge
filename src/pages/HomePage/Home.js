@@ -125,10 +125,10 @@ class Home extends React.Component {
 
         //Check type of radioButton
         if (type === "yes") {
-            goodAnswers++;
+            (index === 'first' || index==='second') ? badAnswers++: goodAnswers++;
             this.setState({ [questionYes]: true, [questionNo]: false });
         } else {
-            badAnswers++;
+            (index === 'first' || index==='second')  ? goodAnswers++ : badAnswers++;
             this.setState({ [questionNo]: true, [questionYes]: false });
         }
 
@@ -205,7 +205,7 @@ class Home extends React.Component {
                                 <RadioButton name='firstButtonYes' label='Yes' checked={this.state.firstQuestionYes} onChange={(event) => this.getQuizResult('yes', 'first')} />
                                 <RadioButton name='firstButtonNo' label='No' checked={this.state.firstQuestionNo} onChange={(event) => this.getQuizResult('no', 'first')} />
                             </Box>
-                            <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Are you using public transportation? </Text>
+                            <Text alignSelf='center' textAlign='center' style={{ fontSize: '2vh', letterSpacing: '1px' }}> Are you stocking up on food beyond what you need? </Text>
                             <Box direction='row' justify='center' style={{ marginTop: '2vh', marginBottom: '2vh' }} gap='medium'>
                                 <RadioButton name='secondButtonYes' label='Yes' checked={this.state.secondQuestionYes} onChange={(event) => this.getQuizResult('yes', 'second')} />
                                 <RadioButton name='firstButtonNo' label='No' checked={this.state.secondQuestionNo} onChange={(event) => this.getQuizResult('no', 'second')} />
