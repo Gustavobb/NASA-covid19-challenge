@@ -11,7 +11,7 @@ class Home extends React.Component {
             searchOptions: ['CO2', 'NO2', 'Urban Heats', 'Deforestation'],
             options: ['CO2', 'NO2', 'Urban Heats', 'Deforestation'],
             dataName: 'NO2',
-            description: 'lorem ipsum dolor',
+            description: 'Nitrogen dioxide, despite contributing to environmental problems such as acid rain, is also very toxic to the lungs. As CO2, it is released in the atmosphere due to the burning of fuel, and its emission has also been reduced due to the Covid quarantine.',
             value: '',
         };
     }
@@ -23,7 +23,7 @@ class Home extends React.Component {
         // find description in mock
         for (var i in database) {
             if (database[i].name === option) { this.setState({ description: database[i].description }); }
-        } 
+        }
     }
 
     render() {
@@ -68,6 +68,11 @@ class Home extends React.Component {
                 </Box>
                 <Box background='#EDEDED' direction='row' pad='xlarge' justify='center'>
                     <Text textAlign='center' style={{ fontSize: '3vh', letterSpacing: '1.5px' }}>Measure your contribution to the environment</Text>
+                    <Box direction='row' justify='center'>
+                        <Text alignSelf='center' textAlign='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '5vh' }}> Are you driving? </Text>
+                        <Text alignSelf='center' textAlign='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '5vh' }}> Are you driving? </Text>
+                        <Text alignSelf='center' textAlign='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '5vh' }}> Are you driving? </Text>
+                    </Box>
                 </Box>
             </Grommet>
         )
