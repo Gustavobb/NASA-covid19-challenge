@@ -42,7 +42,6 @@ class Home extends React.Component {
         // find description in db
         for (var i in database) {
             if (database[i].name === option) {
-                console.log(database[i])
                 this.setState({ description: database[i].description });
                 this.setState({ visualizationPath: database[i].visualization });
             }
