@@ -39,3 +39,5 @@ The site was programmed in [React](https://reactjs.org/), with also libraries as
 ===
 
 The final video was submited in the official **NASA** challenge site, and can be found in YouTube, in this [link](https://youtu.be/vD9-Ac1k6CY).
+
+The implementation is available online on [https://bit.ly/2XLNvfn](https://bit.ly/2XLNvfn)
