@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grommet, Box, Text, Header, Anchor, Image, Select, RadioButton, RangeInput, Chart } from 'grommet';
+import { Grommet, Box, Text, Header, Anchor, Image, Select, RadioButton, RangeInput, ResponsiveContext } from 'grommet';
 import { grommet } from 'grommet/themes';
 import { deepMerge } from 'grommet/utils';
 import database from "../../db.json";
@@ -94,28 +94,55 @@ class Home extends React.Component {
         monthName = monthName.split("/")[1].split(".")[0].replace("2", " 2");
 
         return (
-            <Box pad='small' justify='center'>
-                <Image alignSelf='center' style={{ width: '35vw' }} src={require(`./assets/${this.state.visualizationPath[month]}`)} />
-                <Text alignSelf='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '2vh' }}> {monthName} </Text>
-                <Box alignSelf="center" pad="medium" style={{ width: "25vw" }}>
-                    <RangeInput value={this.state.rangeInputValue} onChange={(e) => this.onChangeRangeInput(e)} />
-                </Box>
-                <Text alignSelf='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '2vh' }}> {this.state.references} </Text>
-            </Box>
-
+            <ResponsiveContext.Consumer>
+                {responsive =>
+                    responsive === "small" ? (
+                        <Box pad='small' justify='center'>
+                            <Image alignSelf='center' style={{ width: '40vh', marginTop: '3vh' }} src={require(`./assets/${this.state.visualizationPath[month]}`)} />
+                            <Text alignSelf='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '2vh' }}> {monthName} </Text>
+                            <Box alignSelf="center" pad="medium" style={{ width: "75vw" }}>
+                                <RangeInput value={this.state.rangeInputValue} onChange={(e) => this.onChangeRangeInput(e)} />
+                            </Box>
+                            <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '2vh' }}> {this.state.references} </Text>
+                        </Box>
+                    ) : (
+                            <Box pad='small' justify='center'>
+                                <Image alignSelf='center' style={{ width: '35vw' }} src={require(`./assets/${this.state.visualizationPath[month]}`)} />
+                                <Text alignSelf='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '2vh' }}> {monthName} </Text>
+                                <Box alignSelf="center" pad="medium" style={{ width: "25vh" }}>
+                                    <RangeInput value={this.state.rangeInputValue} onChange={(e) => this.onChangeRangeInput(e)} />
+                                </Box>
+                                <Text alignSelf='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '2vh' }}> {this.state.references} </Text>
+                            </Box>
+                        )}
+            </ResponsiveContext.Consumer>
         )
     }
 
     renderDataChartDtype() {
         return (
-            <Box pad='large' alignSelf='center' style={{ width: '40vw' }}>
-                <Text alignSelf='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '2.5vh' }}> Variation </Text>
-                <Bar
-                    data={data}
-                />
-                <Text alignSelf='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '2vh' }}>{this.state.references}</Text>
+            <ResponsiveContext.Consumer>
+                {responsive =>
+                    responsive === "small" ? (
+                        <Box pad='large' alignSelf='center' style={{ width: '70vh' }}>
+                            <Text alignSelf='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '2.5vh' }}> Variation </Text>
+                            <Bar
+                                data={data}
+                            />
+                            <Text alignSelf='center' textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '2vh' }}>{this.state.references}</Text>
 
-            </Box>
+                        </Box>
+                    ) : (
+                            <Box pad='large' alignSelf='center' style={{ width: '40vw' }}>
+                                <Text alignSelf='center' style={{ fontSize: '2.5vh', letterSpacing: '1.5px', marginTop: '2.5vh' }}> Variation </Text>
+                                <Bar
+                                    data={data}
+                                />
+                                <Text alignSelf='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginTop: '2vh' }}>{this.state.references}</Text>
+
+                            </Box>
+                        )}
+            </ResponsiveContext.Consumer>
         )
     }
 
@@ -125,10 +152,10 @@ class Home extends React.Component {
 
         //Check type of radioButton
         if (type === "yes") {
-            (index === 'first' || index==='second') ? badAnswers++: goodAnswers++;
+            (index === 'first' || index === 'second') ? badAnswers++ : goodAnswers++;
             this.setState({ [questionYes]: true, [questionNo]: false });
         } else {
-            (index === 'first' || index==='second')  ? goodAnswers++ : badAnswers++;
+            (index === 'first' || index === 'second') ? goodAnswers++ : badAnswers++;
             this.setState({ [questionNo]: true, [questionYes]: false });
         }
 
@@ -155,45 +182,85 @@ class Home extends React.Component {
                     </Box>
                 </Header>
                 </FadeIn>
-                <Box background='#EDEDED' direction='row' pad='xlarge' justify='center'>
-                    <Box direction='row' justify='start' gap='xlarge'>
-                        <Rollin><Image style={{ width: '15vw' }} src={require('./assets/tree.png')} /></Rollin>
-                        <Box direction='column' justify='center'>
-                            <Text textAlign='center' style={{ fontSize: '3.5vh', marginBottom: '2vh', letterSpacing: '1.5px' }}><FadeIn>Does quarantine affect the environment?</FadeIn></Text>
-                            <Text textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px' }}><FadeIn>The covid-19 pandemic changed several human activities.<br />
+                <ResponsiveContext.Consumer>
+                    {responsive =>
+                        responsive === "small" ? (
+                            <Box background='#EDEDED' direction='column' justify='center' alignContent='center'>
+                                <Image alignSelf='center' style={{ width: '20vh', marginBottom: ' 3vh', marginTop: '2vh' }} src={require('./assets/tree.png')} />
+                                <Text textAlign='center' style={{ fontSize: '3vh', marginBottom: '2vh', letterSpacing: '1.5px' }}><FadeIn>Does quarantine affect the environment?</FadeIn></Text>
+                                <Text textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px', marginBottom: '2vh' }}><FadeIn>The covid-19 pandemic changed several human activities.<br />
                             Maybe for the environment this has a positive meaning.</FadeIn></Text>
-                        </Box>
-                    </Box>
-                </Box>
-                {/* <FadeIn> */}
-                <Box background='#E1FF8D' pad='large' justify='center'>
-                    <Box direction='row' justify='center' gap='large'>
-                        <Box direction='column' style={{marginTop: '6vh'}}>
-                            <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> {this.state.dataName} </Text>
-                            <Box alignSelf='center' style={{ width: '15vw' }}>
-                                <Select
-                                    size='medium'
-                                    placeholder='Choose an indicator'
-                                    value={this.state.value}
-                                    options={this.state.options}
-                                    onChange={({ option }) => this.updateQuery(option)}
-                                    onClose={() => this.setState({ options: this.state.searchOptions })}
-                                    onSearch={(text) => {
-                                        const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
-                                        const exp = new RegExp(escapedText, 'i');
-                                        this.setState({ options: this.state.searchOptions.filter(o => exp.test(o)) });
-                                    }}
-                                />
                             </Box>
 
-
-                            <Text  alignSelf='center' style={{ lineHeight: '2', textIndent: '50px', fontSize: '1.8vh', letterSpacing: '1px', marginTop: '3.5vh', width: '45vw' }}>{this.state.description}</Text>
+                        ) : (
+                                <Box background='#EDEDED' direction='row' pad='xlarge' justify='center'>
+                                    <Box direction='row' justify='start' gap='xlarge'>
+                                        <Rollin><Image style={{ width: '15vw' }} src={require('./assets/tree.png')} /></Rollin>
+                                        <Box direction='column' justify='center'>
+                                            <Text textAlign='center' style={{ fontSize: '3.5vh', marginBottom: '2vh', letterSpacing: '1.5px' }}><FadeIn>Does quarantine affect the environment?</FadeIn></Text>
+                                            <Text textAlign='center' style={{ fontSize: '1.5vh', letterSpacing: '1.5px' }}><FadeIn>The covid-19 pandemic changed several human activities.<br />
+                            Maybe for the environment this has a positive meaning.</FadeIn></Text>
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            )}
+                </ResponsiveContext.Consumer>
+                <ResponsiveContext.Consumer>
+                    {responsive =>
+                        responsive === "small" ? (
+                            <Box background='#E1FF8D' pad='large' justify='center'>
+                                <Box direction='column' style={{ marginTop: '6vh' }}>
+                                    <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> {this.state.dataName} </Text>
+                                    <Box alignSelf='center' style={{ width: '30vh' }}>
+                                        <Select
+                                            size='medium'
+                                            placeholder='Choose an indicator'
+                                            value={this.state.value}
+                                            options={this.state.options}
+                                            onChange={({ option }) => this.updateQuery(option)}
+                                            onClose={() => this.setState({ options: this.state.searchOptions })}
+                                            onSearch={(text) => {
+                                                const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
+                                                const exp = new RegExp(escapedText, 'i');
+                                                this.setState({ options: this.state.searchOptions.filter(o => exp.test(o)) });
+                                            }}
+                                        />
+                                    </Box>
+                                    <Text alignSelf='center' style={{ lineHeight: '2', textIndent: '50px', fontSize: '1.8vh', letterSpacing: '1px', marginTop: '3.5vh', width: '30vh' }}>{this.state.description}</Text>
+                                </Box>
+                                {this.state.dataType === "rangeinput" ? this.renderRangeInputDtype()
+                                    : this.state.dataType === "plot" ? this.renderDataChartDtype()
+                                        : null}
+                            </Box>
+                        ) : (<Box background='#E1FF8D' pad='large' justify='center'>
+                            <Box direction='row' justify='center' gap='large'>
+                                <Box direction='column' style={{ marginTop: '6vh' }}>
+                                    <Text textAlign='center' style={{ fontSize: '3.5vh', letterSpacing: '1.5px', marginBottom: '3.5vh' }}> {this.state.dataName} </Text>
+                                    <Box alignSelf='center' style={{ width: '15vw' }}>
+                                        <Select
+                                            size='medium'
+                                            placeholder='Choose an indicator'
+                                            value={this.state.value}
+                                            options={this.state.options}
+                                            onChange={({ option }) => this.updateQuery(option)}
+                                            onClose={() => this.setState({ options: this.state.searchOptions })}
+                                            onSearch={(text) => {
+                                                const escapedText = text.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
+                                                const exp = new RegExp(escapedText, 'i');
+                                                this.setState({ options: this.state.searchOptions.filter(o => exp.test(o)) });
+                                            }}
+                                        />
+                                    </Box>
+                                    <Text alignSelf='center' style={{ lineHeight: '2', textIndent: '50px', fontSize: '1.8vh', letterSpacing: '1px', marginTop: '3.5vh', width: '45vw' }}>{this.state.description}</Text>
+                                </Box>
+                                {this.state.dataType === "rangeinput" ? this.renderRangeInputDtype()
+                                    : this.state.dataType === "plot" ? this.renderDataChartDtype()
+                                        : null}
+                            </Box>
                         </Box>
-                        {this.state.dataType === "rangeinput" ? this.renderRangeInputDtype()
-                            : this.state.dataType === "plot" ? this.renderDataChartDtype()
-                                : null}
-                    </Box>
-                </Box>
+
+                            )}
+                </ResponsiveContext.Consumer>
                 {/* </FadeIn> */}
                 <ScrollAnimation animateIn="fadeIn">
                     <Box background='#EDEDED' pad='xlarge' justify='center'>
